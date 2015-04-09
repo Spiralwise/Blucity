@@ -39,6 +39,7 @@ void draw() {
   city.draw();
   
   // UI
+  noLights();
   textFont(myFont, 8);
   fill(#FCB808);
   PVector textProjection = PVector.sub(cameraTarget, cameraPosition);
@@ -51,6 +52,7 @@ void draw() {
     rotate ( PVector.angleBetween(textProjection, new PVector(textProjection.x, 0.0, textProjection.z)), 1.0, 0.0, 0.0 );
     text(sun.printHour(), -75, -50); // TODO How to put the text exactly on the upper left corner of the screen not arbitrarly?
   popMatrix();
+  lights();
 }
 
 void mouseDragged() {
