@@ -2,8 +2,10 @@ class City {
   
   private float r;
   private Building[] buildings;
+  private PShader buildingShader;
   
   City(int popBuilding, float radius) {
+    buildingShader = loadShader("building.frag.glsl", "building.vert.glsl");
     r = radius;
     buildings = new Building[popBuilding];
     PVector buildingPosition;
@@ -37,7 +39,8 @@ class City {
     popMatrix();
     
     // Buildings
-    fill(color(#99A1A5));
+    shader(buildingShader);
+    buildingShader.set("textureCoeff", daytime_coeff);
     for ( int i = 0; i < buildings.length; i++ )
       buildings[i].draw();
   }

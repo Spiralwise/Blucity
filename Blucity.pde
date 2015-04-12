@@ -39,6 +39,7 @@ void draw() {
   city.draw();
   
   // UI
+  resetShader();
   noLights();
   textFont(myFont, 8);
   fill(#FCB808);

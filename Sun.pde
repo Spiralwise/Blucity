@@ -1,3 +1,5 @@
+static float daytime_coeff;
+
 class Sun {
   
   private final color cSunrise  = color(#FF8705);
@@ -52,19 +54,17 @@ class Sun {
         lightColor   = lerpColor(cSunrise, cNight, (observedAngle-(HALF_PI+QUARTER_PI+(QUARTER_PI/2)))/(QUARTER_PI/2));
         ambientColor = lerpColor(cAmbientSunrise, cAmbientNight, (observedAngle-(HALF_PI+QUARTER_PI+(QUARTER_PI/2)))/(QUARTER_PI/2));
       }
+      daytime_coeff = -pow((observedAngle - HALF_PI)/HALF_PI, 8) +1.0;
     // Night
     } else {
       lightColor = color(#000000);
       ambientColor = color(#0A1436);
+      daytime_coeff = 0.0;
     }
     
     background(ambientColor);
     ambientLight(red(ambientColor), green(ambientColor), blue(ambientColor));
     directionalLight(red(lightColor), green(lightColor), blue(lightColor), -position.x, -position.y, -position.z);
-   /* pushMatrix();
-      translate(position.x, position.y, position.z);
-      sphere(10.0);
-    popMatrix();*/
   }
   
   public int getHour() {
